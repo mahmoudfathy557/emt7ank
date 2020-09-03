@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Exams from './pages/ExamsPage'
-import SingleExam from './pages/SingleExam'
+import ExamsPage from './pages/ExamsPage'
+import SingleExamPage from './pages/SingleExamPage'
 import Default from './pages/Defalut'
 
 class App extends Component {
@@ -9,8 +9,8 @@ class App extends Component {
     return (
       <>
         <Switch>
-          <Route path='/' exact component={Exams} />
-          <Route path='/exams/:name' component={SingleExam} />
+          <Route path='/' exact component={ExamsPage} />
+          <Route path='/exams/:name' component={SingleExamPage} />
           <Route component={Default} />
         </Switch>
       </>
