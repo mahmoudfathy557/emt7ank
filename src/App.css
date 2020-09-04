@@ -110,6 +110,13 @@ Slider
   color: var(--clr-grey-3);
 }
 
+.disabledBtn {
+  visibility: hidden;
+}
+.showBtn {
+  visibility: visible;
+}
+
 @media screen and (min-width: 576px) {
   .slider-container {
     height: 45vh;

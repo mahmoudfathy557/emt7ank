@@ -17,7 +17,7 @@ export default function Exam({ exam }) {
               <Link
                 class='btn btn-secondary'
                 to={`/exams/${exam.subject}`}
-                onClick={() => setSingleExam(exam.subject)}
+                onClick={() => setSingleExam(exam.subject, exam.mcqs)}
               >
                 Take the Quiz
               </Link>

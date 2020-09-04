@@ -9,13 +9,11 @@ class ExamProvider extends Component {
     incorrectAnswers: 0,
     currentQuestion: 1,
     answerId: '',
-    studentAnswerId: null,
-
+    studentAnswerId: '',
+    examMcqs: [],
     singleExam: {},
     loading: true,
     index: 0,
-    disabledNext: false,
-    disabledPrev: false,
   }
 
   componentDidMount() {
@@ -34,48 +32,43 @@ class ExamProvider extends Component {
       ? JSON.parse(localStorage.getItem('singleExam'))
       : {}
   }
-  setSingleExam = (id) => {
+  setSingleExam = (id, examMcqs) => {
     let exam = this.state.exams.find((item) => item.subject === id)
     localStorage.setItem('singleExam', JSON.stringify(exam))
     this.setState({
       singleExam: { ...exam },
       loading: false,
+      examMcqs: examMcqs,
     })
   }
 
-  getRightAnswer = (id) => {
-    console.log(id, 'answerNumber')
-
-    this.setState({ answerId: id })
+  getRightAnswer = (answerId, studentAnswerId) => {
+    this.setState({ answerId, studentAnswerId })
+    console.log(answerId, 'answerId')
+    console.log(studentAnswerId, 'studentAnswerId')
   }
   handleChange = (event) => {
-    const { name, value, id, type, checked } = event.target
+    const { name, value, type, checked } = event.target
     type === 'checkbox'
       ? this.setState({ [name]: checked })
-      : this.setState({ [name]: value, studentAnswerId: id })
+      : this.setState({ [name]: value })
   }
 
-  prevBtn = (e) => {
+  togglePrev = (e) => {
     let index = this.state.index - 1
-    let disabledPrev = index === 0
 
     this.setState({
-      index: index,
-      disabledPrev: disabledPrev,
-      disabledNext: false,
+      index,
     })
   }
-
-  nextBtn(e) {
+  toggleNext = (e) => {
     let index = this.state.index + 1
-    let disabledNext = index === this.state.exams.length - 1
 
     this.setState({
-      index: index,
-      disabledNext: disabledNext,
-      disabledPrev: false,
+      index,
     })
   }
+
   render() {
     return (
       <ExamContext.Provider
@@ -85,8 +78,8 @@ class ExamProvider extends Component {
           handleChange: this.handleChange,
           getRightAnswer: this.getRightAnswer,
 
-          prevBtn: this.prevBtn,
-          nextBtn: this.nextBtn,
+          togglePrev: this.togglePrev,
+          toggleNext: this.toggleNext,
         }}
       >
         {this.props.children}

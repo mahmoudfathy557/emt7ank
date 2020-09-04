@@ -11,13 +11,12 @@ export default function Answer({ index, answer, choice }) {
           <div class='form-check'>
             <label>
               <input
-                id={index}
                 type='radio'
                 name='studentAnswer'
                 value={choice}
                 checked={studentAnswer === choice}
                 onChange={handleChange}
-                onClick={() => getRightAnswer(answer)}
+                onClick={() => getRightAnswer(answer, index)}
               />
               {choice}
             </label>
