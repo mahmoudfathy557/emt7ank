@@ -111,10 +111,10 @@ Slider
 }
 
 .disabledBtn {
-  visibility: hidden;
+  display: none;
 }
 .showBtn {
-  visibility: visible;
+  display: block;
 }
 
 @media screen and (min-width: 576px) {

@@ -27,23 +27,26 @@ export default function QuizRendering(props) {
                     totalQuestions={props.exam.mcqs.length}
                     index={index}
                   />
-
-                  <button
-                    className={index === 0 ? 'disabledBtn' : 'showBtn'}
-                    onClick={togglePrev}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    className={
-                      index === props.exam.mcqs.length - 1
-                        ? 'disabledBtn'
-                        : 'showBtn'
-                    }
-                    onClick={toggleNext}
-                  >
-                    Next
-                  </button>
+                  <div className='btn-container d-flex'>
+                    <button
+                      className={
+                        index === 0 ? 'disabledBtn' : 'showBtn btn-dark mr-2'
+                      }
+                      onClick={togglePrev}
+                    >
+                      Previous
+                    </button>
+                    <button
+                      className={
+                        index === props.exam.mcqs.length - 1
+                          ? 'disabledBtn'
+                          : 'showBtn btn-dark  '
+                      }
+                      onClick={toggleNext}
+                    >
+                      Next
+                    </button>
+                  </div>
                 </div>
               </div>
             )

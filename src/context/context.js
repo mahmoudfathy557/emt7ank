@@ -44,8 +44,6 @@ class ExamProvider extends Component {
 
   getRightAnswer = (answerId, studentAnswerId) => {
     this.setState({ answerId, studentAnswerId })
-    console.log(answerId, 'answerId')
-    console.log(studentAnswerId, 'studentAnswerId')
   }
   handleChange = (event) => {
     const { name, value, type, checked } = event.target
