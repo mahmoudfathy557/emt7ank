@@ -17,7 +17,7 @@ export default function Answer({ index, answer, choice }) {
                 value={choice}
                 checked={studentAnswer === choice}
                 onChange={handleChange}
-                onClick={getRightAnswer(answer)}
+                onClick={() => getRightAnswer(answer)}
               />
               {choice}
             </label>
