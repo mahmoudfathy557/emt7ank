@@ -8,7 +8,7 @@ class ExamProvider extends Component {
     correctAnswers: 0,
     incorrectAnswers: 0,
     currentQuestion: 1,
-    studentAnswer: '',
+    answerId: '',
     studentAnswerId: null,
 
     singleExam: {},
@@ -45,6 +45,8 @@ class ExamProvider extends Component {
 
   getRightAnswer = (id) => {
     console.log(id, 'answerNumber')
+
+    this.setState({ answerId: id })
   }
   handleChange = (event) => {
     const { name, value, id, type, checked } = event.target
@@ -75,7 +77,6 @@ class ExamProvider extends Component {
     })
   }
   render() {
-    console.log(this.state.studentAnswerId, 'studentAnswerId')
     return (
       <ExamContext.Provider
         value={{
