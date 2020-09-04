@@ -9,6 +9,8 @@ class ExamProvider extends Component {
     incorrectAnswers: 0,
     currentQuestion: 1,
     studentAnswer: '',
+    studentAnswerId: null,
+
     singleExam: {},
     loading: true,
     index: 0,
@@ -40,18 +42,15 @@ class ExamProvider extends Component {
       loading: false,
     })
   }
+
+  getRightAnswer = (id) => {
+    console.log(id, 'answerNumber')
+  }
   handleChange = (event) => {
-    const name = event.target.name
-    const value =
-      event.target.type === 'checkbox'
-        ? event.target.checked
-        : event.target.value
-    this.setState(
-      {
-        [name]: value,
-      },
-      this.sortData
-    )
+    const { name, value, id, type, checked } = event.target
+    type === 'checkbox'
+      ? this.setState({ [name]: checked })
+      : this.setState({ [name]: value, studentAnswerId: id })
   }
 
   prevBtn = (e) => {
@@ -75,67 +74,16 @@ class ExamProvider extends Component {
       disabledPrev: false,
     })
   }
-  // nextSlider=()=>{
-  //   this.setState((prevState)=>{
-  //     return{
-  //       sliderCounter:prevState.sliderCounter++
-  //     }
-  //   })
-  //   carousel()
-  // }
-  // slider = () => {
-
-  //   if (this.state.exams.length !== 0) {
-  //     const slides = document.querySelectorAll('.slide')
-
-  //     const nextBtn = document.querySelector('.nextBtn')
-  //     const prevBtn = document.querySelector('.prevBtn')
-  //     slides.forEach(function (slide, index) {
-  //       slide.style.left = `${index * 100}%`
-  //     })
-  //     let counter = 0
-  //      nextSlider=()=>{
-
-  //     }
-
-  //     nextBtn.addEventListener('click', function () {
-  //       counter++
-
-  //     })
-
-  //     prevBtn.addEventListener('click', function () {
-  //       counter--
-
-  //       carousel()
-  //     })
-
-  //     function carousel() {
-  //       if (counter < slides.length - 1) {
-  //         nextBtn.style.display = 'block'
-  //       } else {
-  //         nextBtn.style.display = 'none'
-  //       }
-  //       if (counter > 0) {
-  //         prevBtn.style.display = 'block'
-  //       } else {
-  //         prevBtn.style.display = 'none'
-  //       }
-  //       slides.forEach(function (slide) {
-  //         slide.style.transform = `translateX(-${counter * 100}%)`
-  //       })
-  //     }
-
-  //     prevBtn.style.display = 'none'
-  //   }
-  // }
-
   render() {
+    console.log(this.state.studentAnswerId, 'studentAnswerId')
     return (
       <ExamContext.Provider
         value={{
           ...this.state,
           setSingleExam: this.setSingleExam,
           handleChange: this.handleChange,
+          getRightAnswer: this.getRightAnswer,
+
           prevBtn: this.prevBtn,
           nextBtn: this.nextBtn,
         }}
