@@ -16,7 +16,14 @@ export default function QuizRendering(props) {
     return (
       <ExamConsumer>
         {(value) => {
-          const { toggleNext, togglePrev, index } = value
+          const {
+            toggleNext,
+            togglePrev,
+            index,
+            submitquiz,
+            correctAnswers,
+            incorrectAnswers,
+          } = value
           const quiz = props.exam.mcqs ? props.exam.mcqs[index] : null
           if (quiz) {
             return (
@@ -46,12 +53,27 @@ export default function QuizRendering(props) {
                     >
                       Next
                     </button>
+                    <button
+                      className={
+                        index === props.exam.mcqs.length - 1
+                          ? 'showBtn btn-dark '
+                          : 'disabledBtn'
+                      }
+                      onClick={submitquiz}
+                    >
+                      Submit
+                    </button>
                   </div>
                 </div>
               </div>
             )
-          } else {
-            return <span>error</span>
+          } else if (index === props.exam.mcqs.length) {
+            return (
+              <div className='score-area  btn-container d-flex  '>
+                <div className='correct-answers mr-1'>{`correctAnswers: ${correctAnswers}`}</div>
+                <div className='incorrect-answers ml-1'>{`incorrectAnswers: ${incorrectAnswers}`}</div>
+              </div>
+            )
           }
         }}
       </ExamConsumer>

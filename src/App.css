@@ -116,6 +116,16 @@ Slider
 .showBtn {
   display: block;
 }
+.correct-answers {
+  background: green;
+  color: white;
+  padding: 0.5rem;
+}
+.incorrect-answers {
+  background: red;
+  color: white;
+  padding: 0.5rem;
+}
 
 @media screen and (min-width: 576px) {
   .slider-container {

@@ -15,7 +15,7 @@ export default function Answer({ index, answer, choice }) {
                 name='studentAnswer'
                 value={choice}
                 checked={studentAnswer === choice}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, index)}
                 onClick={() => getRightAnswer(answer, index)}
               />
               {choice}
