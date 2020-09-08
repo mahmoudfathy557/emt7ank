@@ -1,16 +1,26 @@
 import React from 'react'
 import Answer from './Answer'
-export default function AnswerList({ answers }) {
-  const { choice_a, choice_b, choice_c, choice_d, choice_e, answer } = answers
+export default function AnswerList({ singleExam, questionId }) {
+  console.log(questionId, 'questionId')
+  const {
+    choice_a,
+    choice_b,
+    choice_c,
+    choice_d,
+    choice_e,
+    answer,
+  } = singleExam
   let arrAnswers = [choice_a, choice_b, choice_c, choice_d, choice_e]
   let notNullArrAnswers = arrAnswers.filter((item) => item !== null)
 
-  if (arrAnswers) {
+  if (notNullArrAnswers) {
     return (
       <>
-        {notNullArrAnswers.map((choice, index) => (
-          <Answer choice={choice} index={index} key={index} answer={answer} />
-        ))}
+        <Answer
+          choices={notNullArrAnswers}
+          questionId={questionId}
+          answer={answer}
+        />
       </>
     )
   }

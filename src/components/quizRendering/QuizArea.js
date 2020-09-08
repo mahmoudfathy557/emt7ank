@@ -12,7 +12,7 @@ export default function QuizArea(props) {
 
       <Question question={props.question} />
 
-      <AnswerList answers={props} />
+      <AnswerList singleExam={props} questionId={props.id} />
     </div>
   )
 }

@@ -1,26 +1,35 @@
 import React from 'react'
 import { ExamConsumer } from '../../context'
+import { Radio, Input } from 'antd'
 
-export default function Answer({ index, answer, choice }) {
+export default function Answer({ questionId, answer, choices }) {
   return (
     <ExamConsumer>
       {(value) => {
-        const { handleChange, studentAnswer, getRightAnswer } = value
-
+        const { handleChange, studentAnswer, usersAnswers } = value
+        const radioStyle = {
+          display: 'block',
+          height: '30px',
+          lineHeight: '30px',
+        }
         return (
-          <div class='form-check'>
-            <label>
-              <input
-                type='radio'
-                name='studentAnswer'
-                value={choice}
-                checked={studentAnswer === choice}
-                onChange={(e) => handleChange(e, index)}
-                onClick={() => getRightAnswer(answer, index)}
-              />
-              {choice}
-            </label>
-          </div>
+          <Radio.Group
+            onChange={(e, qId) => handleChange(e, questionId)}
+            value={
+              usersAnswers[questionId] !== undefined &&
+              usersAnswers[questionId] !== null
+                ? usersAnswers[questionId]
+                : null
+            }
+          >
+            {choices.map((choice, index) => {
+              return (
+                <Radio style={radioStyle} value={choice} key={index}>
+                  {choice}
+                </Radio>
+              )
+            })}
+          </Radio.Group>
         )
       }}
     </ExamConsumer>

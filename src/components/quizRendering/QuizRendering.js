@@ -25,6 +25,7 @@ export default function QuizRendering(props) {
             incorrectAnswers,
           } = value
           const quiz = props.exam.mcqs ? props.exam.mcqs[index] : null
+
           if (quiz) {
             return (
               <div className='quiz'>

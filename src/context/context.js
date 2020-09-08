@@ -8,9 +8,10 @@ class ExamProvider extends Component {
     correctAnswers: 0,
     incorrectAnswers: 0,
     currentQuestion: 1,
-    answerId: '',
-    studentAnswerId: '',
-    radioChecked: false,
+    usersAnswers: {},
+    // answerId: '',
+    // studentAnswerId: '',
+    // radioChecked: false,
     examMcqs: [],
     singleExam: {},
     loading: true,
@@ -43,17 +44,18 @@ class ExamProvider extends Component {
     })
   }
 
-  getRightAnswer = (answerId, studentAnswerId) => {
-    answerId = parseInt(answerId)
+  // getRightAnswer = (answerId, studentAnswerId) => {
+  //   answerId = parseInt(answerId)
 
-    this.setState({ answerId, studentAnswerId })
-  }
-  handleChange = (event, index) => {
-    const { name, value, type, checked } = event.target
-    type === 'checkbox'
-      ? this.setState({ [name]: checked })
-      : this.setState({ [name]: value, radioChecked: checked })
-    console.log(index, 'from handlechange')
+  //   this.setState({ answerId, studentAnswerId })
+  // }
+  handleChange = (event, qId) => {
+    console.log(qId, 'qId')
+    const { usersAnswers } = this.state
+    usersAnswers[qId] = event.target.value
+
+    this.setState({ usersAnswers })
+    console.log(usersAnswers[qId], 'from handlechange')
   }
 
   setQuizResult = () => {
@@ -65,12 +67,13 @@ class ExamProvider extends Component {
       radioChecked,
       examMcqs,
     } = this.state
-
-    if (radioChecked) {
-      if (answerId === studentAnswerId) {
-        this.setState({ correctAnswers: correctAnswers + 1 })
-      } else {
-        this.setState({ incorrectAnswers: incorrectAnswers + 1 })
+    for (let index = 0; index < examMcqs.length; index++) {
+      if (radioChecked) {
+        if (answerId === studentAnswerId) {
+          this.setState({ correctAnswers: correctAnswers + 1 })
+        } else {
+          this.setState({ incorrectAnswers: incorrectAnswers + 1 })
+        }
       }
     }
 
@@ -95,16 +98,16 @@ class ExamProvider extends Component {
     this.setState({
       index,
     })
-    this.setQuizResult()
+    // this.setQuizResult()
   }
 
-  submitquiz = () => {
-    this.setQuizResult()
-    let index = this.state.index + 1
+  // submitquiz = () => {
+  //   this.setQuizResult()
+  //   let index = this.state.index + 1
 
-    this.setState({ index })
-    console.log('quiz is submitted')
-  }
+  //   this.setState({ index })
+  //   console.log('quiz is submitted')
+  // }
 
   render() {
     return (
@@ -113,8 +116,8 @@ class ExamProvider extends Component {
           ...this.state,
           setSingleExam: this.setSingleExam,
           handleChange: this.handleChange,
-          getRightAnswer: this.getRightAnswer,
-          submitquiz: this.submitquiz,
+          // getRightAnswer: this.getRightAnswer,
+          // submitquiz: this.submitquiz,
           togglePrev: this.togglePrev,
           toggleNext: this.toggleNext,
         }}
